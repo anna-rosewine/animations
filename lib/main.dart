@@ -1,8 +1,30 @@
+import 'package:animations/core/instances.dart';
+import 'package:animations/ui/implicit_animations.dart';
+import 'package:animations/ui/parallax_section.dart';
+import 'package:animations/ui/tween_animation_builder_and_hero.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
+
+class Palette {
+  static const MaterialColor kToDark = const MaterialColor(
+    0xff111111, // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
+    const <int, Color>{
+      50: const Color(0xff111111), //10%
+      100: const Color(0xff11111), //20%
+      200: const Color(0xff111111), //30%
+      300: const Color(0xff111111), //40%
+      400: const Color(0xff111111), //50%
+      500: const Color(0xff111111), //60%
+      600: const Color(0xff111111), //70%
+      700: const Color(0xff111111), //80%
+      800: const Color(0xff111111), //90%
+      900: const Color(0xff000000), //100%
+    },
+  );
+} // you can define
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,7 +44,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Palette.kToDark,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -48,25 +70,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final List<String> pages = ['Implicit Animations', 'Tween and Hero'];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Stack(
-      children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: ColorFiltered(
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.8),
-              BlendMode.darken,
+    return DefaultTabController(
+        length: pages.length,
+        child: Scaffold(
+            appBar: AppBar(
+              bottom: TabBar(
+                tabs: [
+                  ...pages.map((e) => Tab(
+                        text: e,
+                      ))
+                ],
+              ),
             ),
-            child: Image.asset(
-              'assets/background/background.jpg',
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      ],
-    ));
+            body: TabBarView(
+              children: [ImplicitAnimations(), TweenAnimationBuilderExample()],
+            )));
   }
 }
