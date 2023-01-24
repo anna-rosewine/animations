@@ -23,6 +23,7 @@ class _TweenAnimationBuilderExampleState
             Container(
               height: 100,
               child: TweenAnimationBuilder(
+                  curve: Curves.easeIn,
                   tween: Tween<double>(begin: 0, end: 1),
                   child: Text(
                     'Interior Design Styles',

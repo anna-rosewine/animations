@@ -43,13 +43,16 @@ class _OpenPageState extends State<OpenPage> {
             const SizedBox(
               height: 30,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(widget.style.title,
-                    style: TextStyle(fontSize: 30, color: Colors.white)),
-                Heart()
-              ],
+            SizedBox(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(widget.style.title,
+                      style: TextStyle(fontSize: 30, color: Colors.white)),
+                  Heart()
+                ],
+              ),
             )
           ],
         ));
